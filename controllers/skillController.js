@@ -1,13 +1,13 @@
 const express = require("express");
 
 const router = express.Router();
-const skill = require("../models/skill");
+const Skill = require("../models/skill");
 
 //  createSkill
 
 router.post("/create/skill", async (req, res) => {
 try{
-const skills = new skill(req.body);
+const skill = new Skill(req.body);
 const saveSkill = await skill.save();
 res.status(201).json(saveSkill);
 } catch (error) {
@@ -19,7 +19,7 @@ res.status(201).json(saveSkill);
 
 router.get("/skills", async (req, res)=>{
 try{    
-    const getSkills = await skill.find();
+    const getSkills = await Skill.find();
     res.status(200).json(getSkills);
 }catch (error) {
     res.status(400).json({ error: error.message });
@@ -30,7 +30,7 @@ try{
 
 router.get("/skill/:id", async (req, res) => {
 try {
-    const skills = await skill.findById(req.params.id);
+    const skills = await Skill.findById(req.params.id);
     if (!skills) return res.status(404).json("Skill not found");
 
     res.json(skills);
@@ -41,9 +41,9 @@ try {
 
 // updateSkill
 
-router.put("/skill/:id", async (req, res) => {
+router.put("/update/skill/:id", async (req, res) => {
 try{ 
-     const skill = await skill.findByIdAndUpdate(req.params.id, req.body,{new:true});
+     const skill = await Skill.findByIdAndUpdate(req.params.id, req.body,{new:true});
      if (!skill) return res.status(404).json("skill not found");
      res.json(skill);
 } catch (error){res.status(400).json("error.message");}
@@ -51,13 +51,13 @@ try{
 
 // deleteSkill
 
-router.delete("/skill/:id", async (req,res) => {
+router.delete("/delete/skill/:id", async (req,res) => {
 try{
-    const skill = await skill.findIdAndDelete(req.params.id);
+    const skill = await Skill.findByIdAndDelete(req.params.id);
     if (!skill) return res.status(404).json("skill not found");
     res.json("skill deleted");
 } catch (error){
-    res.status(400).json(err.message)
+    res.status(400).json("error.message")
 }
 })
 

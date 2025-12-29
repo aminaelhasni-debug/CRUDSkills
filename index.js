@@ -11,7 +11,7 @@ app.use(express.json());
 
 // connect mongoose
 
-mongoose.connect("mongodb://localhost:27017/eCommerce")
+mongoose.connect("mongodb://localhost:27017/skills")
 .then (()=> console.log("done"))
 .catch(() => console.log("error"));
 
