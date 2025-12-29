@@ -2,6 +2,7 @@
 
 const express = require("express");
 const mongoose = require("mongoose");
+const skillContorller = require("./controllers/skillController")
 
 // allows json to read and accept data 
 
@@ -17,6 +18,7 @@ mongoose.connect("mongodb://localhost:27017/eCommerce")
 app.listen(5000, () => { console.log ("server is runing in port 5000")});
 
 // router
+app.use("/", skillContorller);
 app.get("/test", (req, res) => {
     res.send("hello test page")
 });
